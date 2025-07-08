@@ -73,5 +73,5 @@ Make sure you have:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/adrianhajdin/saas-app.git
+git clone https://github.com/Prince-verma56/Saas-nova-app.git
 cd saas-app
