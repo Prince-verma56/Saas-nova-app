@@ -14,25 +14,34 @@ import {
 import Image from "next/image";
 import CompanionsList from "@/components/CompanionsList";
 
-const Profile = async () => {
-  const user = await currentUser();
 
-  if (!user) redirect("/sign-in");
+async function Profile() {
+
+
+  const user = await currentUser();
+  if (!user) {
+    redirect('/sign-in')
+  }
 
   const companions = await getUserCompanions(user.id);
   const sessionHistory = await getUserSessions(user.id);
-  const bookmarkedCompanions = await getBookmarkedCompanions(user.id);
+
+
+
 
   return (
     <main className="min-lg:w-3/4">
+
       <section className="flex justify-between gap-4 max-sm:flex-col items-center">
         <div className="flex gap-4 items-center">
-          <Image
-            src={user.imageUrl}
-            alt={user.firstName!}
-            width={110}
-            height={110}
-          />
+          <div className="w-full h-full rounded-full overflow-hidden">
+            <Image
+              src={user.imageUrl}
+              alt={user.firstName!}
+              width={110}
+              height={110}
+            />
+          </div>
           <div className="flex flex-col gap-2">
             <h1 className="font-bold text-2xl">
               {user.firstName} {user.lastName}
@@ -64,14 +73,15 @@ const Profile = async () => {
           </div>
         </div>
       </section>
+
       <Accordion type="multiple">
         <AccordionItem value="bookmarks">
           <AccordionTrigger className="text-2xl font-bold">
-            Bookmarked Companions {`(${bookmarkedCompanions.length})`}
+            Bookmarked Companions {`(${getBookmarkedCompanions.length})`}
           </AccordionTrigger>
           <AccordionContent>
             <CompanionsList
-              companions={bookmarkedCompanions}
+              
               title="Bookmarked Companions"
             />
           </AccordionContent>
@@ -96,7 +106,9 @@ const Profile = async () => {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+
     </main>
-  );
-};
-export default Profile;
+  )
+}
+
+export default Profile
